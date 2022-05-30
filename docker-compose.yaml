@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  crdb_node:
+    image: cockroachdb/cockroach:latest
+    container_name: crdb_node
+    volumes:
+      - ./data/crdb_node:/cockroach/cockroach-data
+    command: start-single-node --insecure
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    networks:
+      - public
+    profiles:
+      - platform
+    # networks:
+    #     cockroachdb_net:
+    #         aliases:
+    #           - crdb_node
+    #           - public
+  bet_api:
+    build: ./bet_api
+    container_name: bet_api
+    volumes:
+      - type: bind
+        source: ./bet_api
+        target: /app
+    profiles:
+      - platform
+    depends_on:
+      - crdb_node
+    ports:
+      - "4000:4000"
+    command:
+      - ./run.sh
+  bet_fe:
+    build: ./bet_fe
+    container_name: bet_front_end
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./bet_fe:/app
+      - ./node_modules
+    stdin_open: true
+    tty: true
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9410:9410"
+      - "9411:9411"
+networks:
+  public:
+    driver: bridge
+    ipam:
+      driver: default
+# networks:
+#   public:
+#     cockroachdb_net:
+#         driver: bridge
