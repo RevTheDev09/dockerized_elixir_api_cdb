@@ -18,11 +18,13 @@ config :bet_api, BetApi.Repo,
   username: "root",
   password: "",
   database: "bet_api_dev",
-  hostname: "127.0.0.1",
+  hostname: "172.19.0.1",
   port: 26257,
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10,
-  migration_lock: false
+  pool_size: 20,
+  migration_lock: false,
+  queue_target: 5000,
+  queue_interval: 5000
 
 # config :bet_api, BetApi.Repo,
 #   adapter: Ecto.Adapters.Postgres,

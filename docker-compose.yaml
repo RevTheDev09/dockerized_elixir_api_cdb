@@ -10,14 +10,9 @@ services:
       - "26257:26257"
       - "8080:8080"
     networks:
-      - public
-    profiles:
-      - platform
-    # networks:
-    #     cockroachdb_net:
-    #         aliases:
-    #           - crdb_node
-    #           - public
+        cockroachdb_net:
+            aliases:
+              - crdb_node
   bet_api:
     build: ./bet_api
     container_name: bet_api
@@ -25,8 +20,6 @@ services:
       - type: bind
         source: ./bet_api
         target: /app
-    profiles:
-      - platform
     depends_on:
       - crdb_node
     ports:
@@ -49,12 +42,7 @@ services:
     ports:
       - "9410:9410"
       - "9411:9411"
+
 networks:
-  public:
-    driver: bridge
-    ipam:
-      driver: default
-# networks:
-#   public:
-#     cockroachdb_net:
-#         driver: bridge
+    cockroachdb_net:
+        driver: bridge

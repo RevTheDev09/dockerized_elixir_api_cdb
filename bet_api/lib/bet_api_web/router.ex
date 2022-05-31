@@ -21,9 +21,11 @@ defmodule BetApiWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", BetApiWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", BetApiWeb do
+    pipe_through :api
+
+    post "/users", UserController, :register
+  end
 
   # Enables LiveDashboard only for development
   #
