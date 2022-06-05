@@ -34,7 +34,7 @@ if config_env() == :prod do
     username: "root",
     password: "",
     database: "bet_api_dev",
-    hostname: "172.19.0.1",
+    hostname: "localhost",
     port: 26257,
     show_sensitive_data_on_connection_error: true,
     pool_size: 20,

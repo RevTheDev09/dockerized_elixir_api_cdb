@@ -4,8 +4,8 @@ defmodule BetApi.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias BetApi.Repo
 
+  alias BetApi.Repo
   alias BetApi.Accounts.User
 
   def create_user(attrs) do
@@ -15,7 +15,8 @@ defmodule BetApi.Accounts do
   end
 
   def get_by_email(email) do
-    query = from u in User, where: u.email == ^email
+    query = from(u in User, where: u.email == ^email)
+
     case Repo.one(query) do
       nil -> {:error, :not_found}
       user -> {:ok, user}

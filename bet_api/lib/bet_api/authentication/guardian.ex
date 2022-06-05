@@ -1,8 +1,10 @@
 defmodule BetApi.Guardian do
   use Guardian, otp_app: :bet_api
+  import BetApi.Accounts
+
   alias BetApi.Accounts
 
-  def subject_for_token(resource, _claims) do
+  def subject_for_token(resource_id, _claims) do
     sub = to_string(resource_id)
     {:ok, sub}
   end

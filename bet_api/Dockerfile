@@ -46,7 +46,7 @@ FROM elixir:latest
 
 # Install debian packages
 RUN apt-get update
-RUN apt-get install inotify-tools
+# RUN apt-get install inotify-tools
 
 # Install Phoenix packages
 RUN mix local.hex --force
