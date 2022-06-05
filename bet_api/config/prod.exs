@@ -26,6 +26,10 @@ config :bet_api, BetApi.Repo,
   queue_target: 5000,
   queue_interval: 5000
 
+config :bet_api, BetApi.Guardian,
+  issuer: "bet_api",
+  secret_key: "mysecretkey"
+
 # config :bet_api, BetApi.Repo,
 #   adapter: Ecto.Adapters.Postgres,
 #   url: "${DATABASE_URL}",

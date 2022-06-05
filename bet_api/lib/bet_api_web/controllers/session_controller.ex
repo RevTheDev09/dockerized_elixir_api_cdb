@@ -18,7 +18,7 @@ defmodule BetApiWeb.SessionController do
         conn
         |> put_resp_cookie("ruid", refresh_token)
         |> put_status(:created)
-        |> render("token.json", access_token: access_token)
+        |> render("token.json", access_token: access_token, email: email)
 
       {:error, :unauthorized} ->
         body = Jason.encode!(%{error: "unauthorized"})
@@ -29,7 +29,11 @@ defmodule BetApiWeb.SessionController do
 
   def refresh(conn, _params) do
     refresh_token =
-      Plug.Conn.fetch_cookies(conn) |> Map.from_struct() |> get_in([:cookies, "ruid"])
+      Plug.Conn.fetch_cookies(conn)
+      |> Map.from_struct()
+      |> get_in([:cookies, "ruid"])
+
+    IO.inspect(refresh_token, label: "refresh token: ")
 
     case Guardian.exchange(refresh_token, "refresh", "access") do
       {:ok, _old_stuff, {new_access_token, _new_claims}} ->
@@ -37,8 +41,9 @@ defmodule BetApiWeb.SessionController do
         |> put_status(:created)
         |> render("token.json", %{access_token: new_access_token})
 
-      {:error, _reason} ->
-        body = Jason.encode!(%{error: "unauthorized"})
+      {:error, reason} ->
+        IO.inspect(conn)
+        body = Jason.encode!(%{error: "unauthorized", reason: reason})
 
         conn |> send_resp(401, body)
     end

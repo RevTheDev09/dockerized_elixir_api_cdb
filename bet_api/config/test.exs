@@ -17,6 +17,10 @@ config :bet_api, BetApi.Repo,
   queue_target: 5000,
   queue_interval: 5000
 
+config :bet_api, BetApi.Guardian,
+  issuer: "bet_api",
+  secret_key: "mysecretkey"
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :bet_api, BetApiWeb.Endpoint,

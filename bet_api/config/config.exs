@@ -17,7 +17,7 @@ config :bet_api, BetApiWeb.Endpoint,
   pubsub_server: BetApi.PubSub,
   live_view: [signing_salt: "tdpsvYvA"]
 
-#Basic Auth
+# Basic Auth
 config :bet_api, :basic_auth,
   username: System.get_env("BASIC_AUTH_USERNAME"),
   password: System.get_env("BASIC_AUTH_PASSWORD")

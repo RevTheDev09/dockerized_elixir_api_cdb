@@ -4,8 +4,8 @@ defmodule BetApi.Guardian do
 
   alias BetApi.Accounts
 
-  def subject_for_token(resource_id, _claims) do
-    sub = to_string(resource_id)
+  def subject_for_token(resource, _claims) do
+    sub = to_string(resource.id)
     {:ok, sub}
   end
 

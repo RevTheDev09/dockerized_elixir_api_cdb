@@ -42,6 +42,10 @@ if config_env() == :prod do
     queue_target: 5000,
     queue_interval: 5000
 
+  config :bet_api, BetApi.Guardian,
+    issuer: "bet_api",
+    secret_key: "mysecretkey"
+
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
   # want to use a different value for prod and you most likely don't want
