@@ -31,6 +31,7 @@ defmodule BetApiWeb.Router do
     post("/users", UserController, :register)
     post("/session/new", SessionController, :new)
     get("/products", ProductController, :index)
+
   end
 
   scope "/api", BetApiWeb do
@@ -38,6 +39,8 @@ defmodule BetApiWeb.Router do
 
     post("/session/refresh", SessionController, :refresh)
     post("/session/delete", SessionController, :delete)
+    post("/order/place", OrderController, :place_order)
+    get("/orders", OrderController, :index)
   end
 
   # Enables LiveDashboard only for development

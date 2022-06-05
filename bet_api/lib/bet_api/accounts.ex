@@ -23,6 +23,7 @@ defmodule BetApi.Accounts do
     end
   end
 
+
   def get_by_id(id) do
     User |> Repo.get!(id)
   end
