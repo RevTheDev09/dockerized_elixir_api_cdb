@@ -30,7 +30,7 @@ defmodule BetApiWeb.Router do
 
     post("/users", UserController, :register)
     post("/session/new", SessionController, :new)
-    resources "/products", ProductController, except: [:new, :edit]
+    get("/products", ProductController, :index)
   end
 
   scope "/api", BetApiWeb do
