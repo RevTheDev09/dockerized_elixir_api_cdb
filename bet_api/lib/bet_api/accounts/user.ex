@@ -26,6 +26,7 @@ defmodule BetApi.Accounts.User do
     |> unique_constraint(:email)
     |> encrypt_and_put_password()
   end
+
   defp encrypt_and_put_password(user) do
     with password <- fetch_field!(user, :password) do
       encrypted_password = Bcrypt.Base.hash_password(password, Bcrypt.gen_salt(12, true))

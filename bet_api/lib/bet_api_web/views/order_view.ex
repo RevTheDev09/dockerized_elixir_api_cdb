@@ -15,7 +15,7 @@ defmodule BetApiWeb.OrderView do
       id: order.id,
       total_price: order.total_price,
       order_array: order.order_array,
-      user_id: order.user_id
+      email: order.email
     }
   end
 end

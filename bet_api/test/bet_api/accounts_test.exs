@@ -21,7 +21,12 @@ defmodule BetApi.AccountsTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      valid_attrs = %{email: "some email", first_name: "some first_name", last_name: "some last_name", password: "some password"}
+      valid_attrs = %{
+        email: "some email",
+        first_name: "some first_name",
+        last_name: "some last_name",
+        password: "some password"
+      }
 
       assert {:ok, %User{} = user} = Accounts.create_user(valid_attrs)
       assert user.email == "some email"
@@ -36,7 +41,13 @@ defmodule BetApi.AccountsTest do
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      update_attrs = %{email: "some updated email", first_name: "some updated first_name", last_name: "some updated last_name", password: "some updated password"}
+
+      update_attrs = %{
+        email: "some updated email",
+        first_name: "some updated first_name",
+        last_name: "some updated last_name",
+        password: "some updated password"
+      }
 
       assert {:ok, %User{} = user} = Accounts.update_user(user, update_attrs)
       assert user.email == "some updated email"

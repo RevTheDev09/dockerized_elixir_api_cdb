@@ -13,10 +13,10 @@ defmodule BetApiWeb.ProductView do
   def render("product.json", %{product: product}) do
     %{
       id: product.id,
-      product_id: product.product_id,
       product_name: product.product_name,
       price: product.price,
       quantity: product.quantity,
+      img_url: product.img_url
     }
   end
 end

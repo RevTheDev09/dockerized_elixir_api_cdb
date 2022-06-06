@@ -24,6 +24,11 @@ defmodule BetApiWeb.SessionController do
         body = Jason.encode!(%{error: "unauthorized"})
 
         conn |> send_resp(401, body)
+
+      {:error, :not_found} ->
+          body = Jason.encode!(%{error: "user_not_found"})
+
+          conn |> send_resp(401, body)
     end
   end
 

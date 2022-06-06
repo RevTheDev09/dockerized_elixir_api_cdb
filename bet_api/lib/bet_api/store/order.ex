@@ -3,11 +3,11 @@ defmodule BetApi.Store.Order do
   import Ecto.Changeset
 
   alias BetApi.Inventory.Product
-  schema "orders" do
 
+  schema "orders" do
     field :total_price, :decimal
     field :order_array, {:array, :string}
-    field :user_id, :integer
+    field :email, :string
 
     timestamps()
   end
@@ -15,7 +15,7 @@ defmodule BetApi.Store.Order do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:total_price, :order_array, :user_id])
-    |> validate_required([:total_price, :order_array, :user_id])
+    |> cast(attrs, [:total_price, :order_array, :email])
+    |> validate_required([:total_price, :order_array, :email])
   end
 end

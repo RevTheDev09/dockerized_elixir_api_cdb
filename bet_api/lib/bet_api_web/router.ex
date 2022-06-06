@@ -31,7 +31,6 @@ defmodule BetApiWeb.Router do
     post("/users", UserController, :register)
     post("/session/new", SessionController, :new)
     get("/products", ProductController, :index)
-
   end
 
   scope "/api", BetApiWeb do

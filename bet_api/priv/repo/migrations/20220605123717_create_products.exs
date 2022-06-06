@@ -3,10 +3,10 @@ defmodule BetApi.Repo.Migrations.CreateProducts do
 
   def change do
     create table(:products) do
-      add :product_id, :integer
       add :product_name, :string
       add :price, :decimal
       add :quantity, :integer
+      add :img_url, :string
 
       timestamps()
     end
