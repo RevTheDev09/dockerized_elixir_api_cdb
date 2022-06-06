@@ -3,6 +3,7 @@ defmodule BetApiWeb.OrderController do
 
   alias BetApi.Orders
   alias BetApi.Accounts
+  alias BetApi.Inventory
 
   action_fallback BetApiWeb.FallbackController
 
@@ -13,7 +14,7 @@ defmodule BetApiWeb.OrderController do
 
   def place_order(conn, %{"order" => order_params}) do
     # add validation check for quantity and update quantity after successful order
-    # check if user exists by email - change to using email check
+    update_stock_qty((order_params["order_array"]))
     case check_user_exists(order_params["email"]) do
       {:error, :not_found} ->
         body = Jason.encode!(%{error: "user_not_found"})
@@ -37,6 +38,17 @@ defmodule BetApiWeb.OrderController do
 
       {:error, :not_found} ->
         {:error, :not_found}
+    end
+  end
+
+  defp update_stock_qty(order_array) do
+    result = Jason.decode!(order_array)
+    case Inventory.get_product_by_id(result["id"]) do
+      {:error, :not_found} ->
+        false
+      _ ->
+        true
+
     end
   end
 end

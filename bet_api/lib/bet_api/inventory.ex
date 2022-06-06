@@ -53,4 +53,13 @@ defmodule BetApi.Inventory do
   def change_product(%Product{} = product, attrs \\ %{}) do
     Product.changeset(product, attrs)
   end
+
+  def get_product_by_id(id) do
+    query = from(p in Product, where: p.id == ^id)
+
+    case Repo.one(query) do
+      nil -> {:error, :not_found}
+      product -> {:ok, product}
+    end
+  end
 end
