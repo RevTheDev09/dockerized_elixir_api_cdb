@@ -43,12 +43,7 @@ defmodule BetApiWeb.OrderController do
 
   defp update_stock_qty(order_array) do
     result = Jason.decode!(order_array)
-    case Inventory.get_product_by_id(result["id"]) do
-      {:error, :not_found} ->
-        false
-      _ ->
-        true
-
-    end
+    Inventory.update_stock_qty(result, 2)
+    |> IO.inspect()
   end
 end

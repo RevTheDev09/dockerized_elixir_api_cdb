@@ -62,4 +62,15 @@ defmodule BetApi.Inventory do
       product -> {:ok, product}
     end
   end
+
+  def update_stock_qty(qty, id) do
+    stock = get_product_by_id(id)
+    stock = Ecto.Changeset.change stock, quantity: quantity - qty
+    case Repo.update stock do
+      {:ok, struct} ->
+        "Success"
+      {:error, changeset} ->
+        "Low stock"
+    end
+  end
 end
